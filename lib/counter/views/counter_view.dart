@@ -123,7 +123,13 @@ class ApiButton extends BaseViewModelWidget<CounterViewModel> {
   Widget build(BuildContext context, CounterViewModel viewModel) {
     // A sample image showcasing safe asset reference
     return ElevatedButton(
-      onPressed: viewModel.callApi,
+      onPressed: () => viewModel.callApi(
+        (title, content) => showPlatformDialog(
+          context,
+          title: title,
+          content: content,
+        ),
+      ),
       child: viewModel.isApiLoading
           ? const SizedBox(
               width: 16,

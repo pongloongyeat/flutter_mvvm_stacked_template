@@ -1,6 +1,11 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_mvvm_stacked_template/app/app.dart';
 
+typedef ShowDialogCallback = Future<void> Function(
+  String title,
+  String content,
+);
+
 class AppColors {
   static const primaryColor = Color(0xffffffff);
 }

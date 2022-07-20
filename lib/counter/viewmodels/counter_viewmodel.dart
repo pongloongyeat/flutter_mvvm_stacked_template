@@ -14,7 +14,7 @@ mixin CounterViewModelMixin on BaseViewModel {
 
   void increment();
   void decrement();
-  Future<void> callApi();
+  Future<void> callApi(ShowDialogCallback? onComplete);
 }
 
 class CounterViewModel extends BaseViewModel with CounterViewModelMixin {
@@ -38,7 +38,9 @@ class CounterViewModel extends BaseViewModel with CounterViewModelMixin {
   }
 
   @override
-  Future<void> callApi() async {
+  Future<void> callApi(
+    ShowDialogCallback? onComplete,
+  ) async {
     isApiLoading = true;
     notifyListeners();
 
@@ -49,9 +51,9 @@ class CounterViewModel extends BaseViewModel with CounterViewModelMixin {
 
     final data = response.data;
 
-    // await showPlatformDialog(
-    //   title: 'Data',
-    //   content: data?.toJson().toString() ?? 'Null data',
-    // );
+    return onComplete?.call(
+      'Data',
+      data?.toJson().toString() ?? 'Null data',
+    );
   }
 }
