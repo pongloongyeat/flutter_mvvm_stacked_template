@@ -14,13 +14,11 @@ mixin CounterViewModelMixin on BaseViewModel {
 
   void increment();
   void decrement();
-  void showCurrentCount();
-  void onCopyButtonPressed();
   Future<void> callApi();
 }
 
 class CounterViewModel extends BaseViewModel with CounterViewModelMixin {
-  CounterViewModel(super.context);
+  CounterViewModel();
 
   @override
   void initialise() {
@@ -40,19 +38,6 @@ class CounterViewModel extends BaseViewModel with CounterViewModelMixin {
   }
 
   @override
-  void showCurrentCount() {
-    showPlatformDialog(title: 'Current count', content: count.toString());
-  }
-
-  @override
-  void onCopyButtonPressed() {
-    showPlatformDialog(
-      title: 'Copied count value',
-      content: 'Just kidding I was too lazy to write code for this',
-    );
-  }
-
-  @override
   Future<void> callApi() async {
     isApiLoading = true;
     notifyListeners();
@@ -64,9 +49,9 @@ class CounterViewModel extends BaseViewModel with CounterViewModelMixin {
 
     final data = response.data;
 
-    await showPlatformDialog(
-      title: 'Data',
-      content: data?.toJson().toString() ?? 'Null data',
-    );
+    // await showPlatformDialog(
+    //   title: 'Data',
+    //   content: data?.toJson().toString() ?? 'Null data',
+    // );
   }
 }

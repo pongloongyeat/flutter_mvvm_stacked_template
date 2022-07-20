@@ -15,3 +15,5 @@ export 'services/shared_preferences_service.dart';
 export 'utils/general_helper.dart';
 export 'viewmodels/base_view_model.dart';
 export 'views/app.dart';
+export 'views/base_view.dart';
+export 'views/base_viewmodel_widget.dart';

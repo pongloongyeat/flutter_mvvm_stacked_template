@@ -14,7 +14,7 @@ class CounterView extends StatelessWidget {
     // other than to instantiate the ViewModel. To make reactive
     // rebuilds, separate your widgets into individual ViewModelWidgets.
     return ViewModelBuilder<CounterViewModel>.nonReactive(
-      viewModelBuilder: () => CounterViewModel(context),
+      viewModelBuilder: CounterViewModel.new,
       onModelReady: (viewModel) => viewModel.initialise(),
       builder: (context, viewModel, child) {
         return Scaffold(
@@ -58,7 +58,7 @@ class CounterView extends StatelessWidget {
   }
 }
 
-class CounterText extends ViewModelWidget<CounterViewModel> {
+class CounterText extends BaseViewModelWidget<CounterViewModel> {
   const CounterText({super.key});
 
   @override
@@ -69,35 +69,54 @@ class CounterText extends ViewModelWidget<CounterViewModel> {
   }
 }
 
-class ShowCountButton extends ViewModelWidget<CounterViewModel> {
+class ShowCountButton extends BaseViewModelWidget<CounterViewModel> {
   const ShowCountButton({super.key});
 
   @override
   Widget build(BuildContext context, CounterViewModel viewModel) {
     return ElevatedButton(
-      onPressed: viewModel.showCurrentCount,
+      onPressed: () => showCurrentCount(context, count: viewModel.count),
       child: const Text('Show count'),
+    );
+  }
+
+  void showCurrentCount(
+    BuildContext context, {
+    required int count,
+  }) {
+    showPlatformDialog(
+      context,
+      title: 'Current count',
+      content: count.toString(),
     );
   }
 }
 
-class ImageButton extends ViewModelWidget<CounterViewModel> {
+class ImageButton extends BaseViewModelWidget<CounterViewModel> {
   const ImageButton({super.key});
 
   @override
   Widget build(BuildContext context, CounterViewModel viewModel) {
     // A sample image showcasing safe asset reference
     return ElevatedButton(
-      onPressed: viewModel.onCopyButtonPressed,
+      onPressed: () => onCopyButtonPressed(context),
       child: Image.asset(
         Assets.sample.path,
         color: Colors.white,
       ),
     );
   }
+
+  void onCopyButtonPressed(BuildContext context) {
+    showPlatformDialog(
+      context,
+      title: 'Copied count value',
+      content: 'Just kidding I was too lazy to write code for this',
+    );
+  }
 }
 
-class ApiButton extends ViewModelWidget<CounterViewModel> {
+class ApiButton extends BaseViewModelWidget<CounterViewModel> {
   const ApiButton({super.key});
 
   @override
