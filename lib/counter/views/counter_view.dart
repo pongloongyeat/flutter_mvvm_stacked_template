@@ -4,7 +4,7 @@ import 'package:flutter_mvvm_stacked_template/counter/counter.dart';
 import 'package:flutter_mvvm_stacked_template/l10n/l10n.dart';
 import 'package:stacked/stacked.dart';
 
-class CounterView extends StatelessWidget {
+class CounterView extends BaseView {
   const CounterView({super.key});
 
   @override
@@ -15,7 +15,12 @@ class CounterView extends StatelessWidget {
     // rebuilds, separate your widgets into individual ViewModelWidgets.
     return ViewModelBuilder<CounterViewModel>.nonReactive(
       viewModelBuilder: CounterViewModel.new,
-      onModelReady: (viewModel) => viewModel.initialise(),
+      onModelReady: (viewModel) {
+        viewModel
+          ..initialise()
+          ..showPlatformDialog = (title, content) =>
+              showPlatformDialog(context, title: title, content: content);
+      },
       builder: (context, viewModel, child) {
         return Scaffold(
           appBar: AppBar(title: Text(context.l10n.counterAppBarTitle)),
@@ -123,13 +128,7 @@ class ApiButton extends BaseViewModelWidget<CounterViewModel> {
   Widget build(BuildContext context, CounterViewModel viewModel) {
     // A sample image showcasing safe asset reference
     return ElevatedButton(
-      onPressed: () => viewModel.callApi(
-        (title, content) => showPlatformDialog(
-          context,
-          title: title,
-          content: content,
-        ),
-      ),
+      onPressed: viewModel.callApi,
       child: viewModel.isApiLoading
           ? const SizedBox(
               width: 16,
