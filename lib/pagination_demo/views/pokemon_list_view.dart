@@ -67,7 +67,10 @@ class PokemonListing extends BaseViewModelWidget<PokemonListViewModel> {
           final data = viewModel.data[index];
 
           return ListTile(
-            leading: Text('${index + 1}'),
+            leading: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [Text('${index + 1}')],
+            ),
             title: Text('${data.name}'),
             onTap: () => viewModel.showPokemonDetails(index),
           );
