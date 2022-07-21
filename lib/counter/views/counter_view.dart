@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mvvm_stacked_template/app/app.dart';
 import 'package:flutter_mvvm_stacked_template/counter/counter.dart';
 import 'package:flutter_mvvm_stacked_template/l10n/l10n.dart';
+import 'package:flutter_mvvm_stacked_template/pagination_demo/pagination_demo.dart';
 
 class CounterView extends BaseView<CounterViewModel> {
   const CounterView({super.key});
@@ -33,9 +34,9 @@ class CounterView extends BaseView<CounterViewModel> {
               children: const [
                 ShowCountButton(),
                 SizedBox(width: 8),
-                ImageButton(),
-                SizedBox(width: 8),
                 ApiButton(),
+                SizedBox(width: 8),
+                ImageButton(),
               ],
             ),
           ],
@@ -47,11 +48,13 @@ class CounterView extends BaseView<CounterViewModel> {
         children: [
           FloatingActionButton(
             onPressed: viewModel.increment,
+            heroTag: null,
             child: const Icon(Icons.add),
           ),
           const SizedBox(height: 8),
           FloatingActionButton(
             onPressed: viewModel.decrement,
+            heroTag: null,
             child: const Icon(Icons.remove),
           ),
         ],
@@ -110,10 +113,12 @@ class ImageButton extends BaseViewModelWidget<CounterViewModel> {
   }
 
   void onCopyButtonPressed(BuildContext context) {
-    showPlatformDialog(
-      context,
-      title: 'Copied count value',
-      content: 'Just kidding I was too lazy to write code for this',
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (context) {
+          return const PokemonListView();
+        },
+      ),
     );
   }
 }
