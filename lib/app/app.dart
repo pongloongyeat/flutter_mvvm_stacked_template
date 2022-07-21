@@ -13,7 +13,7 @@ export 'services/api_service.dart';
 export 'services/base_api_service.dart';
 export 'services/shared_preferences_service.dart';
 export 'utils/general_helper.dart';
-export 'viewmodels/base_view_model.dart';
+export 'viewmodels/base_viewmodel.dart';
 export 'views/app.dart';
 export 'views/base_view.dart';
 export 'views/base_viewmodel_widget.dart';
