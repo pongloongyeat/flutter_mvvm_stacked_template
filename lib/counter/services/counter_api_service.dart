@@ -1,8 +1,6 @@
 import 'package:flutter_mvvm_stacked_template/app/app.dart';
 
-class ApiService extends BaseApiService {
-  ApiService();
-
+class CounterApiService extends BaseApiService {
   Future<ResponseModel<ExampleDataModel>> fetchYourData() async {
     final response = await callApi(
       HttpRequestType.get,

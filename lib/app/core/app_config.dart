@@ -18,7 +18,6 @@ class AppConfig {
 
   static void initialiseServices() {
     _initialiseSharedPreferences();
-    _initialiseApiService();
   }
 
   static void initialiseFirebase() {}
@@ -28,12 +27,5 @@ class AppConfig {
       final prefs = await SharedPreferences.getInstance();
       return SharedPreferencesService(prefs);
     });
-  }
-
-  static void _initialiseApiService() {
-    GetIt.instance.registerSingletonWithDependencies(
-      ApiService.new,
-      dependsOn: [SharedPreferencesService],
-    );
   }
 }

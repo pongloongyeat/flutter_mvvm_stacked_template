@@ -9,7 +9,6 @@ export 'models/example_data_model.dart';
 export 'models/response_model.dart';
 export 'models/token_model.dart';
 export 'repositories/base_repository.dart';
-export 'services/api_service.dart';
 export 'services/base_api_service.dart';
 export 'services/shared_preferences_service.dart';
 export 'utils/general_helper.dart';
