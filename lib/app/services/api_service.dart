@@ -11,10 +11,7 @@ class ApiService extends BaseApiService {
     );
 
     if (!response.hasError && response.hasData) {
-      return ResponseModel(
-        data: ExampleDataModel.fromJson(response.data!),
-        status: response.status,
-      );
+      return ResponseModel.success(ExampleDataModel.fromJson(response.data!));
     }
 
     return ResponseModel.error(response.error);
