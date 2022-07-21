@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_mvvm_stacked_template/app/app.dart';
 
@@ -17,7 +18,7 @@ mixin PaginatedViewModelMixin on ChangeNotifier {
   /// your [ScrollController.position] has exceeded your specified
   /// offset.
   void onScrollThresholdExceeded() {
-    Debouncer(debounceDuration).call(() {
+    EasyDebounce.debounce(toString(), debounceDuration, () {
       _nextPage();
       loadMoreData();
     });
