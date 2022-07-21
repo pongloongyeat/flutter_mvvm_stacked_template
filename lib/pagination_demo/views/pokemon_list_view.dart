@@ -54,6 +54,7 @@ class PokemonListing extends BaseViewModelWidget<PokemonListViewModel> {
       onRefresh: viewModel.refreshData,
       child: ListView.builder(
         controller: controller,
+        // +1 here to show the loading indicator at the bottom
         itemCount: viewModel.data.length + 1,
         itemBuilder: (context, index) {
           if (index == viewModel.data.length) {
