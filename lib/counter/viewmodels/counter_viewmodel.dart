@@ -2,8 +2,6 @@ import 'package:flutter_mvvm_stacked_template/app/app.dart';
 import 'package:flutter_mvvm_stacked_template/counter/counter.dart';
 
 mixin CounterViewModelMixin on BaseViewModel {
-  bool isApiLoading = false;
-
   /// Strictly speaking, it is recommended to initialise the
   /// variable whenever possible instead of marking it as late
   /// to prevent uninitialised accesses but it's marked as late
@@ -18,8 +16,6 @@ mixin CounterViewModelMixin on BaseViewModel {
 }
 
 class CounterViewModel extends BaseViewModel with CounterViewModelMixin {
-  CounterViewModel();
-
   @override
   void initialise() {
     count = 0;
@@ -39,19 +35,23 @@ class CounterViewModel extends BaseViewModel with CounterViewModelMixin {
 
   @override
   Future<void> callApi() async {
-    isApiLoading = true;
-    notifyListeners();
+    setBusy(true);
 
     final response = await repository.fetchDitto();
-
-    isApiLoading = false;
-    notifyListeners();
-
     final data = response.data;
+
+    setBusy(false);
 
     return showPlatformDialog?.call(
       'Data',
       data?.toJson().toString() ?? 'Null data',
+    );
+  }
+
+  Future<void> showCurrentCount() async {
+    await showPlatformDialog?.call(
+      'Current count',
+      count.toString(),
     );
   }
 }

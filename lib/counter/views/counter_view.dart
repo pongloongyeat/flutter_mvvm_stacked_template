@@ -80,19 +80,8 @@ class ShowCountButton extends BaseViewModelWidget<CounterViewModel> {
   @override
   Widget build(BuildContext context, CounterViewModel viewModel) {
     return ElevatedButton(
-      onPressed: () => showCurrentCount(context, count: viewModel.count),
+      onPressed: viewModel.showCurrentCount,
       child: const Text('Show count'),
-    );
-  }
-
-  void showCurrentCount(
-    BuildContext context, {
-    required int count,
-  }) {
-    showPlatformDialog(
-      context,
-      title: 'Current count',
-      content: count.toString(),
     );
   }
 }
@@ -128,10 +117,9 @@ class ApiButton extends BaseViewModelWidget<CounterViewModel> {
 
   @override
   Widget build(BuildContext context, CounterViewModel viewModel) {
-    // A sample image showcasing safe asset reference
     return ElevatedButton(
       onPressed: viewModel.callApi,
-      child: viewModel.isApiLoading
+      child: viewModel.isBusy
           ? const SizedBox(
               width: 16,
               height: 16,
