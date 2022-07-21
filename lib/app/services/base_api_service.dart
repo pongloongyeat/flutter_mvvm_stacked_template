@@ -112,6 +112,7 @@ class BaseApiService {
             ),
           );
           break;
+        // TODO: Add more request types
       }
 
       if (response.statusCode == ApiStatusCode.success) {
