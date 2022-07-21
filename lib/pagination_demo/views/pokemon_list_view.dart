@@ -69,6 +69,7 @@ class PokemonListing extends BaseViewModelWidget<PokemonListViewModel> {
           return ListTile(
             leading: Text('${index + 1}'),
             title: Text('${data.name}'),
+            onTap: () => viewModel.showPokemonDetails(index),
           );
         },
       ),

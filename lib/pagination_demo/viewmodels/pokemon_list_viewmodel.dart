@@ -48,4 +48,10 @@ class PokemonListViewModel extends PaginatedViewModel {
 
     setBusy(false);
   }
+
+  Future<void> showPokemonDetails(int index) async {
+    final details = data[index];
+
+    await showPlatformDialog?.call('${details.name}', '${details.url}');
+  }
 }
