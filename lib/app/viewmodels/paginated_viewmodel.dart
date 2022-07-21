@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_mvvm_stacked_template/app/app.dart';
 
-mixin PaginatedViewModelMixin<T> on ChangeNotifier {
+mixin PaginatedViewModelMixin on ChangeNotifier {
   int _currentPage = 0;
   int get currentPage => _currentPage;
 
@@ -39,5 +39,5 @@ mixin PaginatedViewModelMixin<T> on ChangeNotifier {
 
 /// A convenience class that extends the [BaseViewModel] with
 /// the [PaginatedViewModelMixin] applied.
-abstract class PaginatedViewModel<T> extends BaseViewModel
-    with PaginatedViewModelMixin<T> {}
+abstract class PaginatedViewModel extends BaseViewModel
+    with PaginatedViewModelMixin {}
