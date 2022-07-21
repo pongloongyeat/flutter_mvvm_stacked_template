@@ -9,15 +9,13 @@ class CounterView extends BaseView<CounterViewModel> {
 
   @override
   CounterViewModel viewModelBuilder() {
-    return CounterViewModel();
+    return CounterViewModel()..initialise();
   }
 
   @override
   void onModelReady(BuildContext context, CounterViewModel viewModel) {
-    viewModel
-      ..initialise()
-      ..showPlatformDialog = (title, content) =>
-          showPlatformDialog(context, title: title, content: content);
+    viewModel.showPlatformDialog = (title, content) =>
+        showPlatformDialog(context, title: title, content: content);
   }
 
   @override

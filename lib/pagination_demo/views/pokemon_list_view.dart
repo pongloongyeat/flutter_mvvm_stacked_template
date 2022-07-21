@@ -9,15 +9,13 @@ class PokemonListView extends BaseView<PokemonListViewModel> {
 
   @override
   PokemonListViewModel viewModelBuilder() {
-    return PokemonListViewModel();
+    return PokemonListViewModel()..initialise();
   }
 
   @override
   void onModelReady(BuildContext context, PokemonListViewModel viewModel) {
-    viewModel
-      ..initialise()
-      ..showPlatformDialog = (title, content) =>
-          showPlatformDialog(context, title: title, content: content);
+    viewModel.showPlatformDialog = (title, content) =>
+        showPlatformDialog(context, title: title, content: content);
 
     controller.addListener(() {
       if (controller.offset > 0.8 * controller.position.maxScrollExtent) {
