@@ -1,7 +1,8 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_mvvm_stacked_template/app/app.dart';
 import 'package:stacked/stacked.dart' as stacked;
 
-mixin BaseViewModelMixin on stacked.BaseViewModel {
+mixin BaseViewModelMixin on ChangeNotifier {
   ShowDialogCallback? showPlatformDialog;
 }
 
