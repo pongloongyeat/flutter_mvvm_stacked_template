@@ -4,7 +4,7 @@ class CounterApiService extends BaseApiService {
   Future<ResponseModel<ExampleDataModel>> fetchYourData() async {
     final response = await callApi(
       HttpRequestType.get,
-      // '$baseUrl/path/to/refresh/token/endpoint',
+      // '$baseUrl/path/to/your/api',
       'https://pokeapi.co/api/v2/pokemon/ditto',
     );
 
