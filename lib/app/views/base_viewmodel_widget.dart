@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_mvvm_stacked_template/app/app.dart';
 import 'package:stacked/stacked.dart' as stacked;
 
-abstract class BaseViewModelWidget<T extends BaseViewModel>
+abstract class BaseViewModelWidget<T extends ChangeNotifier>
     extends stacked.ViewModelWidget<T> with BaseViewMixin {
   const BaseViewModelWidget({super.key});
 
