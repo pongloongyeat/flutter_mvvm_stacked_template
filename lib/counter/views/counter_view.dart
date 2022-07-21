@@ -2,63 +2,60 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mvvm_stacked_template/app/app.dart';
 import 'package:flutter_mvvm_stacked_template/counter/counter.dart';
 import 'package:flutter_mvvm_stacked_template/l10n/l10n.dart';
-import 'package:stacked/stacked.dart';
 
-class CounterView extends BaseView {
+class CounterView extends BaseView<CounterViewModel> {
   const CounterView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // Use a .nonReactive here to ensure we don't rebuild the whole
-    // widget. The ViewModelBuilder here is used for nothing more
-    // other than to instantiate the ViewModel. To make reactive
-    // rebuilds, separate your widgets into individual ViewModelWidgets.
-    return ViewModelBuilder<CounterViewModel>.nonReactive(
-      viewModelBuilder: CounterViewModel.new,
-      onModelReady: (viewModel) {
-        viewModel
-          ..initialise()
-          ..showPlatformDialog = (title, content) =>
-              showPlatformDialog(context, title: title, content: content);
-      },
-      builder: (context, viewModel, child) {
-        return Scaffold(
-          appBar: AppBar(title: Text(context.l10n.counterAppBarTitle)),
-          body: Center(
-            child: Column(
+  CounterViewModel viewModelBuilder() {
+    return CounterViewModel();
+  }
+
+  @override
+  void onModelReady(BuildContext context, CounterViewModel viewModel) {
+    viewModel
+      ..initialise()
+      ..showPlatformDialog = (title, content) =>
+          showPlatformDialog(context, title: title, content: content);
+  }
+
+  @override
+  Widget builder(BuildContext context, CounterViewModel viewModel) {
+    return Scaffold(
+      appBar: AppBar(title: Text(context.l10n.counterAppBarTitle)),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const CounterText(),
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const CounterText(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    ShowCountButton(),
-                    SizedBox(width: 8),
-                    ImageButton(),
-                    SizedBox(width: 8),
-                    ApiButton(),
-                  ],
-                ),
+              children: const [
+                ShowCountButton(),
+                SizedBox(width: 8),
+                ImageButton(),
+                SizedBox(width: 8),
+                ApiButton(),
               ],
             ),
+          ],
+        ),
+      ),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: viewModel.increment,
+            child: const Icon(Icons.add),
           ),
-          floatingActionButton: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              FloatingActionButton(
-                onPressed: viewModel.increment,
-                child: const Icon(Icons.add),
-              ),
-              const SizedBox(height: 8),
-              FloatingActionButton(
-                onPressed: viewModel.decrement,
-                child: const Icon(Icons.remove),
-              ),
-            ],
+          const SizedBox(height: 8),
+          FloatingActionButton(
+            onPressed: viewModel.decrement,
+            child: const Icon(Icons.remove),
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }
